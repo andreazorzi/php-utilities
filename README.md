@@ -1,13 +1,10 @@
 # PHP Utilities
 A useful collection of php plugins
 
-[TOC]
-
 ## File Uploader
 Is a plugin that allows you to upload and save files quickly with php
 
 ### Example
-`
 
     include("file-uploader.php");
 
@@ -22,5 +19,3 @@ Is a plugin that allows you to upload and save files quickly with php
 
     // Save multiple files
     multipleFileUpload($_FILES["multiple-file"], "file/", $settings);
-
-`
