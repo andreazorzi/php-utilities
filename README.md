@@ -1,6 +1,11 @@
 # PHP Utilities
 A useful collection of php plugins
 
+## Plugin
+-   [File Uploader](#file-uploader)
+
+<hr>
+
 ## File Uploader
 Is a plugin that allows you to upload and save files quickly with php
 
