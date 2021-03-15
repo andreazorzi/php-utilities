@@ -3,6 +3,7 @@ A useful collection of php plugins
 
 ## Plugin
 -   [File Uploader](#file-uploader)
+-   [Url Slug Generator](#url-slug-generator)
 
 <hr>
 
@@ -26,7 +27,7 @@ Is a plugin that allows you to upload and save files quickly with php
     multipleFileUpload($_FILES["multiple-file"], "file/", $settings);
 
 
-## Slug Generator
+## Url Slug Generator
 A simple url slug generator
 
 ### Example
