@@ -5,7 +5,7 @@
      *  PHP Utilities - File Uploader
      *  @see https://github.com/andreazorzi/php-utilities
      *  @author Andrea Zorzi (andreazorzi) <info@zorziandrea.com>
-     *  @version 1.0.0
+     *  @version 1.1.0
      *
      */
     
@@ -23,7 +23,7 @@
      *          @param  int     $iterator       Starting iterator number
      *  }
      *  
-     *  @return int     Status code indicating whether the operation was successful {
+     *  @return Array   An array with the status of the uploaded file and, if the upload was successful, the absolute url of the uploaded file {
      *          0: The operation was successful
      *          1: An error occurred with the uploaded file
      *          2: The uploaded file is not an allowed type
@@ -43,7 +43,7 @@
             $filename = $file["name"];
             
             if(isset($settings["accept"]) && !in_array($fileinfo["ext"], $settings["accept"])){
-                return 2;
+                return array("status" => 2, "url" => "");
             }
             
             if(isset($settings["nameformat"])){
@@ -57,13 +57,13 @@
             }
             
             if(file_put_contents($folder.$filename, file_get_contents($file["tmp_name"])) !== false){
-                return 0;
+                return array("status" => 0, "url" => absolutePath($folder, $filename));
             }
             
-            return 3;
+            return array("status" => 3, "url" => "");
         }
         
-        return 1;
+        return array("status" => 1, "url" => "");
     }
     
     /**
@@ -80,7 +80,7 @@
      *          @param  int     $iterator       Starting iterator number
      *  }
      *  
-     *  @return Array   Array of status codes for each uploaded files indicating whether the operation was successful {
+     *  @return Array   An array containing for each file the status of the uploaded file and, if the upload was successful, the absolute url of the uploaded file {
      *          0: The operation was successful
      *          1: An error occurred with the uploaded file
      *          2: The uploaded file is not an allowed type
@@ -105,7 +105,7 @@
                 $filename = $file["name"][$i];
                 
                 if(isset($settings["accept"]) && !in_array($fileinfo["ext"], $settings["accept"])){
-                    $res[] = 2;
+                    $res[] = array("status" => 2, "url" => "");
                 }
                 else{
                     if(isset($settings["nameformat"])){
@@ -119,15 +119,15 @@
                     }
                     
                     if(file_put_contents($folder.$filename, file_get_contents($file["tmp_name"][$i])) !== false){
-                        $res[] = 0;
+                        $res[] = array("status" => 0, "url" => absolutePath($folder, $filename));
                     }
                     else{
-                        $res[] = 3;
+                        $res[] = array("status" => 3, "url" => "");
                     }
                 }
             }
             else{
-                $res[] = 1;
+                $res[] = array("status" => 1, "url" => "");
             }
         }
         
@@ -165,6 +165,20 @@
         );
         
         isset($pathinfo["extension"]) ? $pathinfo["extension"] : "";
+    }
+    
+    /**
+     *
+     *  Generate the absolute path of a file
+     *  
+     *  @param  String  $folder     The folder
+     *  @param  String  $filename   The filename
+     *  
+     *  @return String  A string containing the absolute path of the file
+     *
+     */
+    function absolutePath($folder, $filename){
+        return str_replace($_SERVER["DOCUMENT_ROOT"], $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"], realpath($folder))."/".$filename;
     }
 
 ?>
