@@ -8,7 +8,8 @@ A useful collection of php plugins
 <hr>
 
 ## File Uploader
-Is a plugin that allows you to upload and save files quickly with php
+Is a plugin that allows you to upload and save files quickly with php.<br>
+On windows servers the calculation of the absolute url of the uploaded file may not be correct.
 
 ### Example
 
@@ -25,7 +26,6 @@ Is a plugin that allows you to upload and save files quickly with php
 
     // Save multiple files
     multipleFileUpload($_FILES["multiple-file"], "file/", $settings);
-
 
 ## Url Slug Generator
 A simple url slug generator
