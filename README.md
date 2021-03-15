@@ -24,3 +24,13 @@ Is a plugin that allows you to upload and save files quickly with php
 
     // Save multiple files
     multipleFileUpload($_FILES["multiple-file"], "file/", $settings);
+
+
+## Slug Generator
+A simple url slug generator
+
+### Example
+
+    include("url-slug-generator.php");
+
+    $urlslug = generateUrlSlug("Page Title: example"); // page-title-example
