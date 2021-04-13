@@ -178,5 +178,31 @@
     function absolutePath($folder, $filename){
         return str_replace($_SERVER["DOCUMENT_ROOT"], $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"], realpath($folder))."/".$filename;
     }
+    
+    /**
+     *
+     *  Get the status text from the status code
+     *  
+     *  @param  int     $status     The status code
+     *  
+     *  @return String  Status string
+     *
+     */
+    function getUploadedFileError($status){
+        if($status == 0){
+            return "Upload successful";
+        }
+        else if($status == 1){
+            return "Loading error";
+        }
+        else if($status == 2){
+            return "The format of the uploaded file is not allowed";
+        }
+        else if($status == 3){
+            return "The file was not saved on the server";
+        }
+        
+        return "";
+    }
 
 ?>
