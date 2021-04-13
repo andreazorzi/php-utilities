@@ -22,10 +22,10 @@ On windows servers the calculation of the absolute url of the uploaded file may 
     );
 
     // Save a single file
-    singleFileUpload($_FILES["file"], "file/", $settings);
+    $singleFile = FileUpload($_FILES["file"], "file/", $settings);
 
     // Save multiple files
-    multipleFileUpload($_FILES["multiple-file"], "file/", $settings);
+    $multipleFile = multipleFileUpload($_FILES["multiple-file"], "file/", $settings);
 
 ## Url Slug Generator
 A simple url slug generator
