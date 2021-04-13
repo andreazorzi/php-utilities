@@ -160,11 +160,9 @@
         $pathinfo = pathinfo($filename);
         
         return array(
-            "ext" => isset($pathinfo["extension"]) ? ".".$pathinfo["extension"] : "",
+            "ext" => isset($pathinfo["extension"]) ? ".".mb_strtolower($pathinfo["extension"]) : "",
             "name" => isset($pathinfo["filename"]) ? $pathinfo["filename"] : ""
         );
-        
-        isset($pathinfo["extension"]) ? $pathinfo["extension"] : "";
     }
     
     /**
