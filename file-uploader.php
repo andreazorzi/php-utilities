@@ -23,7 +23,7 @@
      *          @param  int     $iterator       Starting iterator number
      *  }
      *  
-     *  @return Array   An array with the status of the uploaded file and, if the upload was successful, the absolute url of the uploaded file {
+     *  @return Array   An array with the status of the uploaded file and, if the upload was successful, the absolute url of the uploaded file and the new file name {
      *          0: The operation was successful
      *          1: An error occurred with the uploaded file
      *          2: The uploaded file is not an allowed type
@@ -57,7 +57,7 @@
             }
             
             if(file_put_contents($folder.$filename, file_get_contents($file["tmp_name"])) !== false){
-                return array("status" => 0, "url" => absolutePath($folder, $filename));
+                return array("status" => 0, "url" => absolutePath($folder, $filename), "filename" => $filename);
             }
             
             return array("status" => 3, "url" => "");
@@ -80,7 +80,7 @@
      *          @param  int     $iterator       Starting iterator number
      *  }
      *  
-     *  @return Array   An array containing for each file the status of the uploaded file and, if the upload was successful, the absolute url of the uploaded file {
+     *  @return Array   An array containing for each file the status of the uploaded file and, if the upload was successful, the absolute url of the uploaded file and the new file name {
      *          0: The operation was successful
      *          1: An error occurred with the uploaded file
      *          2: The uploaded file is not an allowed type
@@ -119,7 +119,7 @@
                     }
                     
                     if(file_put_contents($folder.$filename, file_get_contents($file["tmp_name"][$i])) !== false){
-                        $res[] = array("status" => 0, "url" => absolutePath($folder, $filename));
+                        $res[] = array("status" => 0, "url" => absolutePath($folder, $filename), "filename" => $filename);
                     }
                     else{
                         $res[] = array("status" => 3, "url" => "");
