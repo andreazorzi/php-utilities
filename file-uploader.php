@@ -5,7 +5,7 @@
      *  PHP Utilities - File Uploader
      *  @see https://github.com/andreazorzi/php-utilities
      *  @author Andrea Zorzi (andreazorzi) <info@zorziandrea.com>
-     *  @version 1.1.0
+     *  @version 1.2.0
      *
      */
     
@@ -40,7 +40,7 @@
         
         if(isset($file) && $file["error"] == 0){
             $fileinfo = getFileInfo($file["name"]);
-            $filename = $file["name"];
+            $filename = preg_replace('/\s{1,}/i', "_", $file["name"]);
             
             if(isset($settings["accept"]) && !in_array($fileinfo["ext"], $settings["accept"])){
                 return array("status" => 2, "url" => "");
@@ -48,7 +48,7 @@
             
             if(isset($settings["nameformat"])){
                 $filename = $settings["nameformat"];
-                $filename = str_replace("{filename}", $fileinfo["name"], $filename);
+                $filename = str_replace("{filename}", preg_replace('/\s{1,}/i', "_", $fileinfo["name"]), $filename);
                 $filename = str_replace(".{ext}", $fileinfo["ext"], $filename);
                 $filename = str_replace("{t}", time(), $filename);
                 $filename = str_replace("{i}", $settings["iterator"], $filename);
@@ -102,7 +102,7 @@
             
             if($file["error"][$i] == 0){
                 $fileinfo = getFileInfo($file["name"][$i]);
-                $filename = $file["name"][$i];
+                $filename = preg_replace('/\s{1,}/i', "_", $file["name"][$i]);
                 
                 if(isset($settings["accept"]) && !in_array($fileinfo["ext"], $settings["accept"])){
                     $res[] = array("status" => 2, "url" => "");
@@ -110,7 +110,7 @@
                 else{
                     if(isset($settings["nameformat"])){
                         $filename = $settings["nameformat"];
-                        $filename = str_replace("{filename}", $fileinfo["name"], $filename);
+                        $filename = str_replace("{filename}", preg_replace('/\s{1,}/i', "_", $fileinfo["name"]), $filename);
                         $filename = str_replace(".{ext}", $fileinfo["ext"], $filename);
                         $filename = str_replace("{t}", time(), $filename);
                         $filename = str_replace("{i}", $settings["iterator"], $filename);
